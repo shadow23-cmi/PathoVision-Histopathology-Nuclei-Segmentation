@@ -1,0 +1,27 @@
+# create python virtual env
+cd projects
+mkdir pathovision
+python -m venv .venv
+
+# activate virtual env
+source .venv/bin/activate
+
+# install pytorch for unsupported amd gpu
+pip install torch-directml
+
+# check installation of torch-directml
+import torch
+import torch_directml
+dml = torch_directml.device()
+num_devices = torch_directml.device_count()
+print(dml)
+print(num_devices)
+for i in range(num_devices):
+    print(i, torch_directml.device(i))
+
+# Test which gpu device is dedicated
+run torch_directml_check.py
+
+# Further installations
+pip install numpy matplotlib pillow opencv-python lxml ipykernel notebook
+pip install scipy scikit-image
